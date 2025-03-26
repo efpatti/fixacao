@@ -25,16 +25,25 @@ rl.question("Digite o valor de um produto: ", (valorProduto) => {
 
   const desconto = (valorProdutoReal * porcentagem) / 100;
   const valorProdutoComDesconto = valorProdutoReal - desconto;
+  const valorProdutoRealFormatado = valorProdutoReal.toLocaleString("pt-BR", {
+   style: "currency",
+   currency: "BRL",
+  });
+  const descontoFormatado = desconto.toLocaleString("pt-BR", {
+   style: "currency",
+   currency: "BRL",
+  });
+  const valorProdutoComDescontoFormatado =
+   valorProdutoComDesconto.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+   });
 
   console.log(
-   `O valor do produto é R$ ${valorProdutoReal.toFixed(
-    2
-   )}, com desconto de ${porcentagem}%.`
+   `O valor do produto é R$ ${valorProdutoRealFormatado}, com desconto de ${porcentagem}%.`
   );
   console.log(
-   `Desconto: R$ ${desconto.toFixed(
-    2
-   )}\nTotal: R$ ${valorProdutoComDesconto.toFixed(2)}`
+   `Desconto: R$ ${descontoFormatado}\nTotal: R$ ${valorProdutoComDescontoFormatado}`
   );
 
   rl.close();
