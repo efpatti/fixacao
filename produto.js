@@ -6,20 +6,24 @@ const rl = readline.createInterface({
 });
 
 rl.question("Número 1: ", (numeroUm) => {
- if (isNaN(numeroUm) || numeroUm === "") {
-  console.log("Digite um número válido: ");
+ const numeroUmReal = parseFloat(numeroUm);
+ if (isNaN(numeroUmReal)) {
+  console.log("Digite um número válido.");
   rl.close();
   return;
  }
+
  rl.question("Número 2: ", (numeroDois) => {
-  if (isNaN(numeroDois) || numeroDois === "") {
+  const numeroDoisReal = parseFloat(numeroDois);
+  if (isNaN(numeroDoisReal)) {
    console.log("Digite um número válido!");
    rl.close();
    return;
   }
-  const numeroUmReal = parseFloat(numeroUm);
-  const numeroDoisReal = parseFloat(numeroDois);
+
   const produto = numeroUmReal * numeroDoisReal;
-  console.log(numeroUmReal + " * " + numeroDoisReal + " = " + produto);
+  console.log(`Resultado: ${numeroUmReal} * ${numeroDoisReal} = ${produto}`);
+
+  rl.close();
  });
 });
