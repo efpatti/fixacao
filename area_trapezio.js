@@ -6,34 +6,34 @@ const rl = readline.createInterface({
 });
 
 rl.question("Valor da base maior: ", (baseMaior) => {
- if (isNaN(baseMaior) || baseMaior === "") {
-  console.log("Por favor, insira um número válido.");
+ const baseMaiorReal = parseFloat(baseMaior.trim());
+
+ if (isNaN(baseMaiorReal) || baseMaiorReal <= 0) {
+  console.log("Por favor, insira um número válido maior que 0.");
   rl.close();
   return;
  }
 
  rl.question("Valor da base menor: ", (baseMenor) => {
-  if (isNaN(baseMenor) || baseMenor === "") {
-   console.log("Por favor, insira um número válido.");
+  const baseMenorReal = parseFloat(baseMenor.trim());
+
+  if (isNaN(baseMenorReal) || baseMenorReal <= 0) {
+   console.log("Por favor, insira um número válido maior que 0.");
    rl.close();
    return;
   }
 
   rl.question("Valor da altura: ", (altura) => {
-   if (isNaN(altura) || altura === "") {
-    console.log("Por favor, insira um número válido.");
+   const alturaReal = parseFloat(altura.trim());
+
+   if (isNaN(alturaReal) || alturaReal <= 0) {
+    console.log("Por favor, insira um número válido maior que 0.");
     rl.close();
     return;
    }
 
-   // Convertendo as entradas para números flutuantes
-   const baseMaiorNum = parseFloat(baseMaior);
-   const baseMenorNum = parseFloat(baseMenor);
-   const alturaNum = parseFloat(altura);
-
-   // Calculando a área do trapézio
-   let areaTrapezio = ((baseMaiorNum + baseMenorNum) * alturaNum) / 2;
-   console.log("A área do trapézio é: " + areaTrapezio);
+   const areaTrapezio = ((baseMaiorReal + baseMenorReal) * alturaReal) / 2;
+   console.log(`A área do trapézio é: ${areaTrapezio.toFixed(2)}`);
 
    rl.close();
   });
