@@ -6,22 +6,32 @@ const rl = readline.createInterface({
 });
 
 rl.question("Salário atual: ", (salarioAtual) => {
- if (isNaN(salarioAtual) || salarioAtual === "") {
+ const salarioAtualReal = parseFloat(salarioAtual);
+
+ if (isNaN(salarioAtualReal) || salarioAtualReal < 0) {
   console.log("Por favor, insira um número válido.");
   rl.close();
   return;
  }
 
  rl.question("Percentual do aumento: ", (percentualAumento) => {
-  if (isNaN(percentualAumento) || percentualAumento === "") {
-   console.log("Insira um número válido");
+  const percentualAumentoReal = parseFloat(percentualAumento);
+
+  if (isNaN(percentualAumentoReal) || percentualAumentoReal < 0) {
+   console.log("Insira um percentual válido.");
    rl.close();
    return;
   }
-  const salarioAtualNum = parseFloat(salarioAtual);
-  const percentualAumentoNum = parseFloat(percentualAumento);
-  const aumento = (salarioAtualNum * percentualAumentoNum) / 100;
-  let novoSalario = salarioAtualNum + aumento;
-  console.log("Seu novo salário é: ", novoSalario + " R$");
+
+  const aumento = (salarioAtualReal * percentualAumentoReal) / 100;
+  const novoSalario = salarioAtualReal + aumento;
+
+  console.log(
+   `Seu novo salário é: R$ ${novoSalario.toFixed(
+    2
+   )} (aumento de R$ ${aumento.toFixed(2)})`
+  );
+
+  rl.close();
  });
 });
