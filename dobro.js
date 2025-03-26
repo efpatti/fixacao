@@ -6,12 +6,14 @@ const rl = readline.createInterface({
 });
 
 rl.question("Digite um número: ", (numeroDigitado) => {
- if (isNaN(numeroDigitado) || numeroDigitado === "") {
+ const numeroDigitadoReal = parseFloat(numeroDigitado.trim());
+
+ if (isNaN(numeroDigitadoReal)) {
   console.log("Digite um número válido!");
   rl.close();
   return;
  }
- const numeroDigitadoNum = parseFloat(numeroDigitado);
- const dobro = numeroDigitadoNum * 2;
- console.log("O dobro de " + numeroDigitadoNum + " é " + dobro);
+ const dobro = numeroDigitadoReal * 2;
+ console.log(`O dobro de ${numeroDigitadoReal} é ${dobro}`);
+ rl.close();
 });
