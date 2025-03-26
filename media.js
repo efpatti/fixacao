@@ -5,34 +5,37 @@ const rl = readline.createInterface({
  output: process.stdout,
 });
 
-rl.question("Nota 1: ", (notaUm) => {
- const notaUmReal = parseFloat(notaUm.trim());
- if (isNaN(notaUmReal) || notaUmReal < 0 || notaUmReal > 10) {
-  console.log("Digite uma nota válida, entre 1 e 10!");
-  rl.close();
-  return;
- }
+const validarNota = (nota) => {
+ const notaReal = parseFloat(nota.trim());
+ return !isNaN(notaReal) && notaReal >= 0 && notaReal <= 10;
+};
 
- rl.question("Nota 2: ", (notaDois) => {
-  const notaDoisReal = parseFloat(notaDois.trim());
-  if (isNaN(notaDoisReal) || notaDoisReal < 0 || notaDoisReal > 10) {
-   console.log("Digite uma nota válida, entre 1 e 10!");
-   rl.close();
-   return;
-  }
-
-  rl.question("Nota 3: ", (notaTres) => {
-   const notaTresReal = parseFloat(notaTres.trim());
-   if (isNaN(notaTresReal) || notaTresReal < 0 || notaTresReal > 10) {
-    console.log("Digite uma nota válida, entre 1 e 10!");
-    rl.close();
-    return;
+const obterNota = (pergunta) => {
+ return new Promise((resolve) => {
+  rl.question(pergunta, (nota) => {
+   if (validarNota(nota)) {
+    resolve(parseFloat(nota.trim()));
+   } else {
+    console.log("Digite uma nota válida entre 0 e 10!");
+    resolve(null);
    }
-
-   const media = (notaUmReal + notaDoisReal + notaTresReal) / 3;
-
-   console.log(`A média das 3 notas é: ${media.toFixed(1)}`);
-   rl.close();
   });
  });
-});
+};
+
+const calcularMedia = async () => {
+ const nota1 = await obterNota("Nota 1: ");
+ if (nota1 === null) return rl.close();
+
+ const nota2 = await obterNota("Nota 2: ");
+ if (nota2 === null) return rl.close();
+
+ const nota3 = await obterNota("Nota 3: ");
+ if (nota3 === null) return rl.close();
+
+ const media = (nota1 + nota2 + nota3) / 3;
+ console.log(`A média das 3 notas é: ${media.toFixed(1)}`);
+ rl.close();
+};
+
+calcularMedia();
