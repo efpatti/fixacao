@@ -6,13 +6,16 @@ const rl = readline.createInterface({
 });
 
 rl.question("Valor do lado do quadrado: ", (lado) => {
- if (isNaN(lado) || lado === "") {
-  console.log("Por favor, insira um número válido.");
- } else {
-  const ladoNumerico = parseFloat(lado);
-  let areaQuadrado = ladoNumerico ** 2;
-  console.log("A área do quadrado é: " + areaQuadrado);
+ const ladoReal = parseFloat(lado.trim());
+
+ if (isNaN(ladoReal) || ladoReal <= 0) {
+  console.log("Por favor, insira um número válido (maior que 0).");
+  rl.close();
+  return;
  }
+
+ const areaQuadrado = ladoReal ** 2;
+ console.log(`A área do quadrado é: ${areaQuadrado.toFixed(2)}`);
 
  rl.close();
 });
