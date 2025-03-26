@@ -24,12 +24,18 @@ rl.question("Salário atual: ", (salarioAtual) => {
   }
 
   const aumento = (salarioAtualReal * percentualAumentoReal) / 100;
+  const aumentoFormatado = aumento.toLocaleString("pt-BR", {
+   style: "currency",
+   currency: "BRL",
+  });
   const novoSalario = salarioAtualReal + aumento;
+  const novoSalarioFormatado = novoSalario.toLocaleString("pt-BR", {
+   style: "currency",
+   currency: "BRL",
+  });
 
   console.log(
-   `Seu novo salário é: R$ ${novoSalario.toFixed(
-    2
-   )} (aumento de R$ ${aumento.toFixed(2)})`
+   `Seu novo salário é: R$ ${novoSalarioFormatado} (aumento de R$ ${aumento})`
   );
 
   rl.close();
